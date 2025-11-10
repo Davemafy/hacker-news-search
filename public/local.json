@@ -1,0 +1,20 @@
+[
+  {
+    "id": "2c332d73",
+    "name": "Alfie Johnson",
+    "dob": "1985-04-12",
+    "condition": "Hypertension"
+  },
+  {
+    "id": "8a1b9e0f",
+    "name": "Jane Smith",
+    "dob": "1992-07-25",
+    "condition": "Asthma"
+  },
+  {
+    "id": "5f9c1d2e",
+    "name": "Robert Paulson",
+    "dob": "1971-11-03",
+    "condition": "Type 2 Diabetes"
+  }
+]
