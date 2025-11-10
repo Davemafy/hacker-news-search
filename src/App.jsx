@@ -100,7 +100,8 @@ const App = () => {
         Hacker News Search
       </h1>
 
-      <div className="flex flex-row items-end gap-4 justify-between">
+      <div className="flex flex-col
+      sm:flex-row sm:items-end gap-4 justify-between">
         <InputWithLabel
           id="search"
           value={searchTerm}
@@ -114,7 +115,7 @@ const App = () => {
           type="button"
           disabled={!searchTerm}
           onClick={handleSearchSubmit}
-          className={`px-4 py-2 rounded-md text-white font-semibold transition ${
+          className={`px-4 py-2 rounded-md text-white font-semibold transition  ${
             searchTerm
               ? "bg-blue-600 hover:bg-blue-700"
               : "bg-gray-400 cursor-not-allowed"

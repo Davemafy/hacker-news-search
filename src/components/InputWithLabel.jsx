@@ -17,7 +17,7 @@ const InputWithLabel = ({
   }, [isFocused]);
 
   return (
-    <div className=" flex-1 flex flex-col w-full sm:w-auto">
+    <div className="flex-1 flex flex-col w-full sm:w-auto">
       <label
         htmlFor={id}
         className="mb-1 font-medium text-gray-700 select-none"
