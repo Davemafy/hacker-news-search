@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
-import "./App.css";
+import List from "./components/List"
+import InputWithLabel from "./components/InputWithLabel";
 
 const API_ENDPOINT = "https://hn.algolia.com/api/v1/search?query=";
 
@@ -94,10 +95,12 @@ const App = () => {
   };
 
   return (
-    <div className="container">
-      <h1>Hacker News Search</h1>
+    <div className="max-w-4xl mx-auto p-6 flex flex-col gap-6">
+      <h1 className="text-3xl font-extrabold text-center text-gray-900">
+        Hacker News Search
+      </h1>
 
-      <div className="field">
+      <div className="flex flex-row items-end gap-4 justify-between">
         <InputWithLabel
           id="search"
           value={searchTerm}
@@ -111,16 +114,29 @@ const App = () => {
           type="button"
           disabled={!searchTerm}
           onClick={handleSearchSubmit}
+          className={`px-4 py-2 rounded-md text-white font-semibold transition ${
+            searchTerm
+              ? "bg-blue-600 hover:bg-blue-700"
+              : "bg-gray-400 cursor-not-allowed"
+          }`}
         >
           Search
         </button>
       </div>
-      <hr />
 
-      {stories.isError && <p>Something went wrong ...</p>}
+      <hr className="border-gray-300" />
+
+      {stories.isError && (
+        <p className="text-red-600 font-semibold text-center">
+          Something went wrong ...
+        </p>
+      )}
+
       <div>
         {stories.isLoading ? (
-          <p>Loading ...</p>
+          <p className="text-center text-gray-600 text-lg font-medium">
+            Loading ...
+          </p>
         ) : (
           <List list={stories.data} onRemoveItem={handleRemoveStory} />
         )}
@@ -128,57 +144,5 @@ const App = () => {
     </div>
   );
 };
-
-const InputWithLabel = ({
-  id,
-  value,
-  type = "text",
-  onInputChange,
-  isFocused,
-  children,
-}) => {
-  const inputRef = React.useRef();
-
-  React.useEffect(() => {
-    if (isFocused) {
-      inputRef.current.focus();
-    }
-  }, [isFocused]);
-
-  return (
-    <div>
-      <label htmlFor={id}>{children}</label>
-      &nbsp;
-      <input
-        ref={inputRef}
-        id={id}
-        type={type}
-        value={value}
-        onChange={onInputChange}
-      />
-    </div>
-  );
-};
-
-const List = ({ list, onRemoveItem }) =>
-  list.map((item) => (
-    <Item key={item.objectID} item={item} onRemoveItem={onRemoveItem} />
-  ));
-
-const Item = ({ item, onRemoveItem }) => (
-  <div className="item">
-    <span>
-      <a href={item.url}>{item.title}</a>
-    </span>
-    <span>{item.author}</span>
-    <span>{item.num_comments}</span>
-    <span>{item.points}</span>
-    <span>
-      <button type="button" onClick={() => onRemoveItem(item)}>
-        Dismiss
-      </button>
-    </span>
-  </div>
-);
 
 export default App;
